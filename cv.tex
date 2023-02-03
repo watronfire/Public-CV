@@ -74,6 +74,24 @@
 
 %\quote{``Be the change that you want to see in the world."}
 
+%-------------------------------------------------------------------------------
+\addbibresource{sections/publications.bib}
+
+% hook for counting the number of entries
+% inside each refsection in biblatex
+% src: https://tex.stackexchange.com/a/495997/49520
+\makeatletter
+\AtDataInput{%
+  \ifltxcounter{datacount@\the\c@refsection}
+    {}
+    {\newcounter{datacount@\the\c@refsection}}%
+  \stepcounter{datacount@\the\c@refsection}}
+
+\newcommand*{\refsectionbibcount}{\arabic{datacount@\the\c@refsection}}
+\makeatother
+
+% for formatting the heading using our style
+\defbibheading{subbibnumbered}[\refname]{\cvsubsection{#1}}
 
 %-------------------------------------------------------------------------------
 \begin{document}
@@ -96,7 +114,7 @@
 %-------------------------------------------------------------------------------
 \input{sections/education.tex}
 \input{sections/experience.tex}
-\input{sections/writing.tex}
+\input{sections/publications.tex}
 \input{sections/honors.tex}
 %\input{sections/extracurricular.tex}
 %\input{sections/certificates.tex}
