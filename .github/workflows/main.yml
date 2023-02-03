@@ -2,34 +2,21 @@ name: Compile PDFs
 
 on:
   push: {}
+  pull_request: {}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    #container: texlive/texlive:latest
+    container: texlive/texlive:latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repo
+      uses: actions/checkout@v3
 
-    - name: Install texlive
-      run: sudo apt install texlive-base
-    - name: Install texlive-latex-extra
-      run: sudo apt-get install texlive-latex-extra
-    - name: Build pdf
-      run: pdflatex cv.tex -o cv.pdf
+    - name: Compile
+      run: make
 
-    - name: Verify Changed files
-      uses: tj-actions/verify-changed-files@v13
-      id: verify-changed-files
+    - uses: actions/upload-artifact@v3
       with:
-        files: |
-          cv.pdf
-
-    - name: Commit changed files
-      if: steps.verify-changed-files.outputs.files_changed == 'true'
-      run: |
-        git config --global user.name 'watronfire'
-        git config --global user.email 'snowboardman007@gmail.com'
-        git commit -am "Updated CV $(date +'%Y-%m-%d')"
-        git push
-
+        name: cv
+        path: cv.pdf
