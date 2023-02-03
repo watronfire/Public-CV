@@ -2,7 +2,6 @@ name: Compile PDFs
 
 on:
   push: {}
-  pull_request: {}
 
 jobs:
   build:
@@ -10,8 +9,7 @@ jobs:
     container: texlive/texlive:latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
     - name: Compile
       run: make
