@@ -16,7 +16,9 @@ jobs:
     - name: Compile
       run: make
 
-    - uses: actions/upload-artifact@v3
+    - name: Create pull request
+      uses: peter-evans/create-pull-request@v3
       with:
-        name: examples
-        path: examples/*.pdf
+        commit-message: pdflatex build
+        branch: pdflatex_build
+        title: '[CI] pdflatex build'
