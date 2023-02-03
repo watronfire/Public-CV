@@ -782,7 +782,7 @@
 %-------------------------------------------------------------------------------
 %                Bibliography
 %-------------------------------------------------------------------------------
-%\RequirePackage[style=verbose, maxnames=99, sorting=ydnt]{biblatex}
+% H/t @aminmkhan
 \RequirePackage[ % BibLaTeX
 	sorting=ydnt, % Sorts entries by year (descending order), name, title
 	style=verbose,
@@ -919,9 +919,9 @@
   \renewcommand*{\multinamedelim}{\addcomma\addspace}%
   \nameparts{#1}%
   \ifthenelse{\value{listcount}=1}
-    {\ifblank{\namepartgiven}{}{\namepartgiven\space}%
+    {\ifblank{\namepartgiveni}{}{\namepartgiveni\space}%
     \namepartfamily}%
-    {\ifblank{\namepartgiven}{}{\namepartgiven\space}%
+    {\ifblank{\namepartgiveni}{}{\namepartgiveni\space}%
     \namepartfamily}%
   \ifthenelse{\value{listcount}<\value{liststop}}
   {\addcomma\space}
