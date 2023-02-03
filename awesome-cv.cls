@@ -1,4 +1,4 @@
-%% Start of file `awesome-cv.cls'.
+%% Start of file `awesome-sections.cls'.
 % Awesome CV Class File
 %
 % This class has been downloaded from:
@@ -9,7 +9,7 @@
 % http://www.posquit0.com
 %
 % Notes:
-% 1) This class file defines the structure and layout of the template file (cv.tex, resume.tex).
+% 1) This class file defines the structure and layout of the template file (sections.tex, resume.tex).
 % 2) It has been written in such a way that under most circumstances you
 % should not need to edit it.
 %
@@ -88,7 +88,7 @@
   pdfsubject={},
   pdfkeywords={}
 }
-% Solves issues Warning: File `cv.out' has changed
+% Solves issues Warning: File `sections.out' has changed
 \RequirePackage{bookmark}
 
 %-------------------------------------------------------------------------------
@@ -638,7 +638,7 @@
 }{%
   \end{center}
 }
-% Define an entry of cv information
+% Define an entry of sections information
 % Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
 \newcommand*{\cventry}[5]{%
   \vspace{-2.0mm}
@@ -659,7 +659,7 @@
 }{%
   \end{center}
 }
-% Define a subentry of cv information
+% Define a subentry of sections information
 % Usage: \cvsubentry{<position>}{<title>}{<date>}{<description>}
 \newcommand*{\cvsubentry}[4]{%
   \setlength\tabcolsep{0pt}
@@ -689,7 +689,7 @@
     \end{tabular*}
   \end{center}
 }
-% Define a line of cv information(honor, award or something else)
+% Define a line of sections information(honor, award or something else)
 % Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
 \newcommand*{\cvhonor}[4]{%
   \honordatestyle{#4} & \honorpositionstyle{#1}, \honortitlestyle{#2} & \honorlocationstyle{#3} \\
@@ -707,7 +707,7 @@
     \end{tabular*}
   \end{center}
 }
-% Define a line of cv information(skill)
+% Define a line of sections information(skill)
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
 	\skilltypestyle{#1} & \skillsetstyle{#2} \\

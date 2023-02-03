@@ -88,7 +88,7 @@ If you don't want to install the dependencies on your system, this can also be o
 At a command prompt, run
 
 ```bash
-xelatex {your-cv}.tex
+xelatex {your-sections}.tex
 ```
 
 Or using docker:
