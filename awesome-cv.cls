@@ -778,3 +778,189 @@
       \letterenclosurestyle{\@letterenclname: \@letterenclosure} \\
     }
 }
+
+%-------------------------------------------------------------------------------
+%                Bibliography
+%-------------------------------------------------------------------------------
+% H/t @ravijo
+\RequirePackage[ % BibLaTeX
+  sorting=ydnt, % Sorts entries by year (descending order), name, title
+  style=verbose,
+  doi=true,
+  isbn=true,
+  url=true,
+  eprint=true,
+  backref=false, % include back references in bibliography
+  maxcitenames=3, % affects only the citations in the document body
+  maxbibnames=99, % affects only the bibliography, pass 99 to print all
+  hyperref=true,
+  block=none,
+  backend=biber % {Options: bibtex, biber}
+  ]{biblatex}
+
+% Avoid splitting entries across page break (only for 3 or fewer lines)
+% Tip: http://tex.stackexchange.com/a/51261
+\AtBeginEnvironment{thebibliography}{%
+  \clubpenalty10000
+  \@clubpenalty \clubpenalty
+  \widowpenalty10000
+  \interlinepenalty5000}
+
+% Customized format, based on Fancy CV template created by Adrien Friggeri
+\DeclareFieldFormat[article]{title}{#1\par}
+\DeclareFieldFormat[inproceedings]{title}{#1\par}
+\DeclareFieldFormat[misc]{title}{#1\par}
+\DeclareFieldFormat[report]{title}{#1\par}
+\DeclareFieldFormat[incollection]{title}{#1\par}
+
+\newbibmacro*{doi+isbn+url}{%
+  \iffieldundef{doi}%
+  {% check isbn if bibtex entry does not contain doi
+    \iffieldundef{isbn}%
+    {% check url if bibtex entry does not contain isbn
+      \iffieldundef{url}%
+      {}% do nothing because this bibtex entry does not contain doi, isbn or url
+      {% print url because this bibtex entry does not contain doi or isbn
+        \printfield{url}%
+      }
+    }{% print url because this bibtex entry does not contain doi
+      \printfield{isbn}%
+    }
+  }
+  {% print url because this bibtex entry contain doi
+    \printfield{doi}%
+  }
+}
+
+\DeclareBibliographyDriver{article}{%
+  \fontsize{9pt}{1em}\bodyfont%
+  \printfield{title}%
+  \newblock%
+  \printnames{author}%
+  \par%
+  \newblock%
+  {%
+    \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
+    \usebibmacro{journal+issuetitle}%
+    \setunit{\space}%
+    \printfield{pages}%
+    \newunit%
+    \printlist{publisher}%
+    %\printfield{publisher}%
+    %\setunit*{\addcomma\space}%
+    %\printfield{year}%
+    \par%
+    {%
+      \setlength\tabcolsep{0pt}
+      \setlength{\extrarowheight}{0pt}
+      \begin{tabular*}{\textwidth - 0.4cm}{@{\extracolsep{\fill}} L{\textwidth - 5cm} R{4cm}}
+        \usebibmacro{doi+isbn+url}%
+          &%
+        \printfield{year}%
+      \end{tabular*}
+    }
+  }
+  \par\vspace{0.3\baselineskip}
+}
+
+\DeclareBibliographyDriver{inproceedings}{%
+  \fontsize{9pt}{1em}\bodyfont%
+  \printfield{title}%
+  \newblock%
+  \printnames{author}%
+  \par%
+  \newblock%
+  {%
+    \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
+    %\printfield{booktitle}%
+    %\setunit{\addcomma\space}%
+    %\printfield{year}%
+    %\setunit{\addcomma\space}%
+    %\printlist{location}%
+    \setlength\tabcolsep{0pt}
+    \setlength{\extrarowheight}{0pt}
+    \begin{tabular*}{\textwidth - 0.4cm}{@{\extracolsep{\fill}} L{\textwidth - 5cm} R{4cm}}
+      \printfield{booktitle}%
+        &%
+      \conflocationstyle{\printlist{location}}\\% next line
+      \usebibmacro{doi+isbn+url}%
+        &%
+      \printfield{year}%
+    \end{tabular*}
+  }
+  \par\vspace{0.3\baselineskip}
+}
+
+\DeclareBibliographyDriver{incollection}{%
+  \fontsize{9pt}{1em}\bodyfont%
+  \printfield{title}%
+  \newblock%
+  \printnames{author}%
+  \par%
+  \newblock%
+  {%
+    \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
+    \printfield{booktitle}%
+    \setunit{\addcomma\space}%
+    \printfield{year}%
+    \setunit{\addcomma\space}%
+    \printlist{location}%
+    \newunit%
+  }
+  \par\vspace{0.3\baselineskip}
+}
+
+\DeclareBibliographyDriver{misc}{%
+  \fontsize{9pt}{1em}\bodyfont%
+  \printfield{title}%
+  \newblock%
+  \printnames{author}%
+  \par%
+  \newblock%
+  {%
+    \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
+    \printfield{booktitle}%
+    \setunit*{\addcomma\space}%
+    \printfield{note}%
+    \setunit*{\addcomma\space}%
+    \printfield{year}%
+    \setunit{\addcomma\space}%
+    \printlist{location}%
+    \newunit%
+  }
+  \par\vspace{0.3\baselineskip}
+}
+
+\DeclareBibliographyDriver{report}{%
+  \fontsize{9pt}{1em}\bodyfont%
+  \printfield{title}%
+  \newblock%
+  \printnames{author}%
+  \par%
+  \newblock%
+  {%
+    \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
+    \printfield{type}%
+    \setunit{\space}%
+    \printfield{number}%
+    \setunit{\addcomma\space}%
+    \printfield{year}%
+    \newunit%
+  }
+  \par\vspace{0.3\baselineskip}
+}
+
+% New syntax for flexible backend (BibLaTeX > v3.3)
+\DeclareNameFormat{author}{%
+  \fontsize{9pt}{1em}\bodyfont%
+  \renewcommand*{\multinamedelim}{\addcomma\addspace}%
+  \nameparts{#1}%
+  \ifthenelse{\value{listcount}=1}
+    {\ifblank{\namepartgiven}{}{\namepartgiven\space}%
+    \namepartfamily}%
+    {\ifblank{\namepartgiven}{}{\namepartgiven\space}%
+    \namepartfamily}%
+  \ifthenelse{\value{listcount}<\value{liststop}}
+  {\addcomma\space}
+  {}
+}
