@@ -782,55 +782,37 @@
 %-------------------------------------------------------------------------------
 %                Bibliography
 %-------------------------------------------------------------------------------
-% H/t @ravijo
+%\RequirePackage[style=verbose, maxnames=99, sorting=ydnt]{biblatex}
 \RequirePackage[ % BibLaTeX
-  sorting=ydnt, % Sorts entries by year (descending order), name, title
-  style=verbose,
-  doi=true,
-  isbn=true,
-  url=true,
-  eprint=true,
-  backref=false, % include back references in bibliography
-  maxcitenames=3, % affects only the citations in the document body
-  maxbibnames=99, % affects only the bibliography, pass 99 to print all
-  hyperref=true,
-  block=none,
-  backend=biber % {Options: bibtex, biber}
-  ]{biblatex}
+	sorting=ydnt, % Sorts entries by year (descending order), name, title
+	style=verbose,
+	doi=false,
+	isbn=true,
+	url=false,
+	eprint=false,
+	backref = false, % include back references in bibliography
+	maxcitenames=3, % affects only the citations in the document body
+	maxbibnames=99, % affects only the bibliography, pass 99 to print all
+	hyperref=true,
+	block=none,
+	backend=biber % {Options: bibtex, biber}
+	]{biblatex}
 
 % Avoid splitting entries across page break (only for 3 or fewer lines)
 % Tip: http://tex.stackexchange.com/a/51261
 \AtBeginEnvironment{thebibliography}{%
-  \clubpenalty10000
-  \@clubpenalty \clubpenalty
-  \widowpenalty10000
-  \interlinepenalty5000}
+   \clubpenalty10000
+   \@clubpenalty \clubpenalty
+   \widowpenalty10000
+   \interlinepenalty5000}
 
-% Customized format, based on Fancy CV template created by Adrien Friggeri
+% Customized format, based on the Fancy CV template created by Adrien Friggeri
+% See https://github.com/ashee/cv (MIT license)
 \DeclareFieldFormat[article]{title}{#1\par}
 \DeclareFieldFormat[inproceedings]{title}{#1\par}
 \DeclareFieldFormat[misc]{title}{#1\par}
 \DeclareFieldFormat[report]{title}{#1\par}
 \DeclareFieldFormat[incollection]{title}{#1\par}
-
-\newbibmacro*{doi+isbn+url}{%
-  \iffieldundef{doi}%
-  {% check isbn if bibtex entry does not contain doi
-    \iffieldundef{isbn}%
-    {% check url if bibtex entry does not contain isbn
-      \iffieldundef{url}%
-      {}% do nothing because this bibtex entry does not contain doi, isbn or url
-      {% print url because this bibtex entry does not contain doi or isbn
-        \printfield{url}%
-      }
-    }{% print url because this bibtex entry does not contain doi
-      \printfield{isbn}%
-    }
-  }
-  {% print url because this bibtex entry contain doi
-    \printfield{doi}%
-  }
-}
 
 \DeclareBibliographyDriver{article}{%
   \fontsize{9pt}{1em}\bodyfont%
@@ -846,19 +828,9 @@
     \printfield{pages}%
     \newunit%
     \printlist{publisher}%
-    %\printfield{publisher}%
-    %\setunit*{\addcomma\space}%
-    %\printfield{year}%
-    \par%
-    {%
-      \setlength\tabcolsep{0pt}
-      \setlength{\extrarowheight}{0pt}
-      \begin{tabular*}{\textwidth - 0.4cm}{@{\extracolsep{\fill}} L{\textwidth - 5cm} R{4cm}}
-        \usebibmacro{doi+isbn+url}%
-          &%
-        \printfield{year}%
-      \end{tabular*}
-    }
+    \setunit*{\addcomma\space}%
+    \printfield{year}%
+    \newunit%
   }
   \par\vspace{0.3\baselineskip}
 }
@@ -872,21 +844,12 @@
   \newblock%
   {%
     \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
-    %\printfield{booktitle}%
-    %\setunit{\addcomma\space}%
-    %\printfield{year}%
-    %\setunit{\addcomma\space}%
-    %\printlist{location}%
-    \setlength\tabcolsep{0pt}
-    \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth - 0.4cm}{@{\extracolsep{\fill}} L{\textwidth - 5cm} R{4cm}}
-      \printfield{booktitle}%
-        &%
-      \conflocationstyle{\printlist{location}}\\% next line
-      \usebibmacro{doi+isbn+url}%
-        &%
-      \printfield{year}%
-    \end{tabular*}
+    \printfield{booktitle}%
+    \setunit{\addcomma\space}%
+    \printfield{year}%
+    \setunit{\addcomma\space}%
+    \printlist{location}%
+    \newunit%
   }
   \par\vspace{0.3\baselineskip}
 }
