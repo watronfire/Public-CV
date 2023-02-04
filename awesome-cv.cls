@@ -913,33 +913,3 @@
   \par\vspace{0.3\baselineskip}
 }
 
-% New syntax for flexible backend (BibLaTeX > v3.3)
-\def\makenamesetup{%
-  \def\bibnamedelima{~}%
-  \def\bibnamedelimb{ }%
-  \def\bibnamedelimc{ }%
-  \def\bibnamedelimd{ }%
-  \def\bibnamedelimi{ }%
-  \def\bibinitperiod{.}%
-  \def\bibinitdelim{~}%
-  \def\bibinithyphendelim{.-}}
-\newcommand*{\makename}[2]{\begingroup\makenamesetup\xdef#1{#2}\endgroup}
-
-\newcommand*{\boldname}[3]{%
-  \def\lastname{#1}%
-  \def\firstname{#2}%
-  \def\firstinit{#3}}
-\boldname{}{}{}
-
-% Patch new definitions
-\renewcommand{\mkbibnamegiven}[1]{%
-  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiven}} or test {\ifdefequal{\firstinit}{\namepartgiven}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
-  {\mkbibbold{#1}}{#1}%
-}
-
-\renewcommand{\mkbibnamefamily}[1]{%
-  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiven}} or test {\ifdefequal{\firstinit}{\namepartgiven}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
-  {\mkbibbold{#1}}{#1}%
-}
-
-\boldname{Last}{First}{Initial} % Specify the author's name
