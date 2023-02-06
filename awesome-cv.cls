@@ -833,6 +833,7 @@
     \newunit%
   }
   \par\vspace{0.3\baselineskip}
+  \hfill \break
 }
 
 \DeclareBibliographyDriver{inproceedings}{%
