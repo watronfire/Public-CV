@@ -948,12 +948,12 @@
 
 % Patch new definitions
 \renewcommand{\mkbibnamegiven}[1]{%
-  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiveni}} or test {\ifdefequal{\firstinit}{\namepartgiveni}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
+  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiven}} or test {\ifdefequal{\firstinit}{\namepartgiven}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
   {\mkbibbold{#1}}{#1}%
 }
 
 \renewcommand{\mkbibnamefamily}[1]{%
-  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiveni}} or test {\ifdefequal{\firstinit}{\namepartgiveni}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
+  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiven}} or test {\ifdefequal{\firstinit}{\namepartgiven}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
   {\mkbibbold{#1}}{#1}%
 }
 
