@@ -684,8 +684,8 @@
   \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-      }{%
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 4.5cm} R{4.5cm}}
+}{%
     \end{tabular*}
   \end{center}
 }
@@ -739,7 +739,7 @@
 % Define a section for the cover letter
 % Usage: \lettersection{<section-title>}
 \newcommand{\lettersection}[1]{%
-  \par\addvspace{2.5ex}
+  \par\addvspace{0.5ex}
   \phantomsection{}
   \lettersectionstyle{#1}
   \color{sectiondivider}\vhrulefill{0.9pt}
