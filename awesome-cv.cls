@@ -914,16 +914,63 @@
 }
 
 % New syntax for flexible backend (BibLaTeX > v3.3)
-\DeclareNameFormat{author}{%
-  \fontsize{9pt}{1em}\bodyfont%
-  \renewcommand*{\multinamedelim}{\addcomma\addspace}%
-  \nameparts{#1}%
-  \ifthenelse{\value{listcount}=1}
-    {\ifblank{\namepartgiveni}{}{\namepartgiveni\space}%
-    \namepartfamily}%
-    {\ifblank{\namepartgiveni}{}{\namepartgiveni\space}%
-    \namepartfamily}%
-  \ifthenelse{\value{listcount}<\value{liststop}}
-  {\addcomma\space}
-  {}
+%\DeclareNameFormat{author}{%
+%  \fontsize{9pt}{1em}\bodyfont%
+%  \renewcommand*{\multinamedelim}{\addcomma\addspace}%
+%  \nameparts{#1}%
+%  \ifthenelse{\value{listcount}=1}
+%    {\ifblank{\namepartgiveni}{}{\namepartgiveni\space}%
+%    \namepartfamily}%
+%    {\ifblank{\namepartgiveni}{}{\namepartgiveni\space}%
+%    \namepartfamily}%
+%  \ifthenelse{\value{listcount}<\value{liststop}}
+%  {\addcomma\space}
+%  {}
+%}
+
+\RequirePackage[ % BibLaTeX
+	sorting=ydnt, % Sorts entries by year (descending order), name, title
+	style=numeric,
+	doi=false,
+	isbn=true,
+	url=false,
+	eprint=false,
+	backref = false, % include back references in bibliography
+	maxcitenames=3, % affects only the citations in the document body
+	maxbibnames=99, % affects only the bibliography, pass 99 to print all
+	hyperref=true,
+	block=none,
+	backend=biber % {Options: bibtex, biber}
+	]{biblatex}
+\addbibresource{sections/publications.bib}
+\renewcommand*\newunitpunct{}
+
+\def\makenamesetup{%
+  \def\bibnamedelima{~}%
+  \def\bibnamedelimb{ }%
+  \def\bibnamedelimc{ }%
+  \def\bibnamedelimd{ }%
+  \def\bibnamedelimi{ }%
+  \def\bibinitperiod{.}%
+  \def\bibinitdelim{~}%
+  \def\bibinithyphendelim{.-}}
+\newcommand*{\makename}[2]{\begingroup\makenamesetup\xdef#1{#2}\endgroup}
+
+\newcommand*{\boldname}[3]{%
+  \def\lastname{#1}%
+  \def\firstname{#2}%
+  \def\firstinit{#3}}
+\boldname{}{}{}
+
+% Patch new definitions
+\renewcommand{\mkbibnamegiven}[1]{%
+  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiveni}} or test {\ifdefequal{\firstinit}{\namepartgiveni}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
+  {\mkbibbold{#1}}{#1}%
 }
+
+\renewcommand{\mkbibnamefamily}[1]{%
+  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiveni}} or test {\ifdefequal{\firstinit}{\namepartgiveni}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
+  {\mkbibbold{#1}}{#1}%
+}
+
+\boldname{Nathaniel}{Matteson}{L.} % Specify the author's name
