@@ -743,7 +743,7 @@
   \phantomsection{}
   \lettersectionstyle{#1}
   \color{sectiondivider}\vhrulefill{0.9pt}
-  \par\nobreak\addvspace{0.1ex}
+  \par\nobreak\addvspace{0.4ex}
   \lettertextstyle
 }
 
@@ -919,9 +919,9 @@
   \renewcommand*{\multinamedelim}{\addcomma\addspace}%
   \nameparts{#1}%
   \ifthenelse{\value{listcount}=1}
-    {\ifblank{\namepartgiven}{}{\namepartgiven\space}%
+    {\ifblank{\namepartgiveni}{}{\namepartgiveni\space}%
     \namepartfamily}%
-    {\ifblank{\namepartgiven}{}{\namepartgiven\space}%
+    {\ifblank{\namepartgiveni}{}{\namepartgiveni\space}%
     \namepartfamily}%
   \ifthenelse{\value{listcount}<\value{liststop}}
   {\addcomma\space}
