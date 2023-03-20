@@ -794,6 +794,7 @@
 	maxcitenames=3, % affects only the citations in the document body
 	maxbibnames=99, % affects only the bibliography, pass 99 to print all
 	hyperref=true,
+    giveninits=true,
 	block=none,
 	backend=biber % {Options: bibtex, biber}
 	]{biblatex}
