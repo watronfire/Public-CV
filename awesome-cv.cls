@@ -928,22 +928,6 @@
 %  {}
 %}
 
-\RequirePackage[ % BibLaTeX
-	sorting=ydnt, % Sorts entries by year (descending order), name, title
-	style=numeric,
-	doi=false,
-	isbn=true,
-	url=false,
-	eprint=false,
-	backref = false, % include back references in bibliography
-	maxcitenames=3, % affects only the citations in the document body
-	maxbibnames=99, % affects only the bibliography, pass 99 to print all
-	hyperref=true,
-	block=none,
-	backend=biber % {Options: bibtex, biber}
-	]{biblatex}
-\addbibresource{sections/publications.bib}
-\renewcommand*\newunitpunct{}
 
 \def\makenamesetup{%
   \def\bibnamedelima{~}%
@@ -973,4 +957,4 @@
   {\mkbibbold{#1}}{#1}%
 }
 
-\boldname{Nathaniel}{Matteson}{L.} % Specify the author's name
+\boldname{Matteson}{Nathaniel}{L} % Specify the author's name
