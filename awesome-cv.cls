@@ -81,12 +81,14 @@
 % Needed to deal a paragraphs
 \RequirePackage{parskip}
 % Needed to deal hyperlink
-\RequirePackage[hidelinks,unicode,pdfpagelabels=false]{hyperref}
+\RequirePackage[unicode,pdfpagelabels=false]{hyperref}
 \hypersetup{%
   pdftitle={},
   pdfauthor={},
   pdfsubject={},
-  pdfkeywords={}
+  pdfkeywords={},
+  urlbordercolor={0 0 1},
+  pdfborder = {1 1 1}
 }
 % Solves issues Warning: File `sections.out' has changed
 \RequirePackage{bookmark}
