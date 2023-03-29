@@ -82,14 +82,7 @@
 \RequirePackage{parskip}
 % Needed to deal hyperlink
 \RequirePackage[unicode,pdfpagelabels=false]{hyperref}
-\hypersetup{%
-  pdftitle={},
-  pdfauthor={},
-  pdfsubject={},
-  pdfkeywords={},
-  urlbordercolor={0 0 1},
-  pdfborder = {1 1 1}
-}
+
 % Solves issues Warning: File `sections.out' has changed
 \RequirePackage{bookmark}
 
@@ -157,6 +150,15 @@
 % Awesome section color
 \def\@sectioncolor#1#2#3{%
   \ifbool{acvSectionColorHighlight}{{\color{awesome}#1#2#3}}{#1#2#3}%
+}
+
+\hypersetup{%
+  pdftitle={},
+  pdfauthor={},
+  pdfsubject={},
+  pdfkeywords={},
+  colorlinks=true,
+  urlcolor=awesome-skyblue
 }
 
 
